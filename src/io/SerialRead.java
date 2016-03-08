@@ -1,35 +1,32 @@
 package io;
 import java.io.InputStream;
-import java.util.Enumeration;
 
-import event.SerialEvent;
-import gnu.io.CommPortIdentifier;
-import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
-public class SerialRead implements Runnable {
-	private static CommPortIdentifier portId;
-	private static Enumeration portList;
-	private InputStream inputStream;
-	private SerialPort serialPort;
-	private Thread readThread;
+public class SerialRead implements SerialPortEventListener {
+	private InputStream in;
+	private byte[] buffer = new byte[1024];
 	
-	public SerialRead() {
-		try {
-			serialPort = (SerialPort) portId.open(" ", 1000); //打开端口
-			inputStream = serialPort.getInputStream();
-			serialPort.addEventListener(new SerialEvent()); //注册监听事件
-			serialPort.setSerialPortParams(38400, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_EVEN);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public SerialRead(InputStream in) {
+		this.in = in;
 	}
 	
-	public void run() {
+	public void serialEvent(SerialPortEvent arg0) {
+		int data;
 		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {
+			int len = 0;
 			
+			while ((data = in.read()) > -1) {
+				if (data == '\n') {
+					break;
+				}
+				buffer[len++] = (byte)data;
+				System.out.print(new String(buffer, 0, len));
+			}
+		} catch (Exception e) {
+			System.out.println("Error: SerialEvent!!!");
+			e.printStackTrace();
 		}
 	}
 }
