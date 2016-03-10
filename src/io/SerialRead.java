@@ -1,32 +1,32 @@
 package io;
+
 import java.io.InputStream;
+import java.io.Serializable;
 
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
+import conf.SerialConf;
 
-public class SerialRead implements SerialPortEventListener {
-	private InputStream in;
-	private byte[] buffer = new byte[1024];
+public class SerialRead implements Serializable {
+	InputStream in;
+	byte[] buffer = new byte[SerialConf.BUFFER_SIZE];
 	
 	public SerialRead(InputStream in) {
 		this.in = in;
 	}
 	
-	public void serialEvent(SerialPortEvent arg0) {
+	public String read() {
 		int data;
+		int len = 0;
 		try {
-			int len = 0;
-			
 			while ((data = in.read()) > -1) {
 				if (data == '\n') {
 					break;
 				}
 				buffer[len++] = (byte)data;
-				System.out.print(new String(buffer, 0, len));
 			}
 		} catch (Exception e) {
 			System.out.println("Error: SerialEvent!!!");
 			e.printStackTrace();
 		}
+		return new String(buffer, 0, len);
 	}
 }
