@@ -1,5 +1,4 @@
-import communication.SerialCommunication;
-
+import comm.SerialComm;
 import conf.SerialConf;
 
 public class Serial {
@@ -9,7 +8,7 @@ public class Serial {
 	
 	static void start() {
 		try {
-			SerialCommunication serialComm = new SerialCommunication(SerialConf.WINDOWS_PORT);
+			SerialComm serialComm = new SerialComm(SerialConf.WINDOWS_PORT);
 			serialComm.open();
 		} catch (Exception e) {
 			System.out.println("Error: start!!!");

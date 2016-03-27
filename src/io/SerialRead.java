@@ -21,8 +21,11 @@ public class SerialRead implements Serializable {
 				if (data == '\n') {
 					break;
 				}
+				
+				//ÅÐ¶ÏÊý¾Ý
 				buffer[len++] = (byte)data;
 			}
+			System.out.println(new String(buffer, 0, len));
 		} catch (Exception e) {
 			System.out.println("Error: SerialEvent!!!");
 			e.printStackTrace();

@@ -19,7 +19,7 @@ public class SerialWrite {
         BufferedReader in = null;
 
         try {
-            String urlNameString = SerialConf.URL + "?" + "param=" + out;
+            String urlNameString = SerialConf.URL + "?" + "comm=" + out;
             URL realUrl = new URL(urlNameString);
             URLConnection conn = realUrl.openConnection();
 
@@ -31,7 +31,6 @@ public class SerialWrite {
             in = new BufferedReader(new InputStreamReader(conn.getInputStream())); //server return
             if (in != null) {
                 System.out.println(in.readLine());
-                System.out.println(new Date());
             }
         } catch (Exception e) {
             System.out.println("Error: SerialWrite!");

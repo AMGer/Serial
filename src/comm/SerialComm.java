@@ -1,4 +1,4 @@
-package communication;
+package comm;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -12,12 +12,12 @@ import java.io.InputStream;
 
 import conf.SerialConf;
 
-public class SerialCommunication implements SerialPortEventListener {
+public class SerialComm implements SerialPortEventListener {
 	private String port;
 	private InputStream in;
 	private SerialPort serialPort;
 	
-	public SerialCommunication(String port) {
+	public SerialComm(String port) {
 		this.port = port;
 	}
 	
@@ -59,25 +59,25 @@ public class SerialCommunication implements SerialPortEventListener {
 				
 			/* Overrun error, 溢位错误 */
 			case SerialPortEvent.OE:
-				
+			
 			/* Framing error, 传帧错误 */
 			case SerialPortEvent.FE:
-				
+			
 			/* Parity error, 校验错误 */
 			case SerialPortEvent.PE:
-				
+			
 			/* Carrier detect, 载波检测 */
 			case SerialPortEvent.CD:
-				
+			
 			/* Clear to send, 清除发送 */
 			case SerialPortEvent.CTS:
-				
+			
 			/* Data set ready, 数据设置就绪 */
 			case SerialPortEvent.DSR:
-				
+			
 			/* Ring indicator, 响铃指示 */
 			case SerialPortEvent.RI:
-				
+			
 			case SerialPortEvent.OUTPUT_BUFFER_EMPTY:
 				System.out.println("Error: buffer empty!");
 			break;
