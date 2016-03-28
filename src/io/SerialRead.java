@@ -2,34 +2,39 @@ package io;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.ByteBuffer;
 
 import conf.SerialConf;
 
 public class SerialRead implements Serializable {
 	InputStream in;
-	byte[] buffer = new byte[SerialConf.BUFFER_SIZE];
 	
 	public SerialRead(InputStream in) {
 		this.in = in;
 	}
 	
 	public String read() {
-		int data;
-		int len = 0;
+		int data = 0;
+		String out = null;
+		ByteBuffer buffer = ByteBuffer.allocate(SerialConf.BUFFER_SIZE);
+		
 		try {
 			while ((data = in.read()) > -1) {
 				if (data == '\n') {
 					break;
 				}
-				
-				//ÅÐ¶ÏÊý¾Ý
-				buffer[len++] = (byte)data;
+				buffer.put((byte) data);
 			}
-			System.out.println(new String(buffer, 0, len));
+			buffer.flip();
+			out = new String(buffer.array());
+			
+			//debug
+			System.out.println(new String(buffer.array()));
+			buffer.clear();
 		} catch (Exception e) {
 			System.out.println("Error: SerialEvent!!!");
 			e.printStackTrace();
 		}
-		return new String(buffer, 0, len);
+		return out;
 	}
 }

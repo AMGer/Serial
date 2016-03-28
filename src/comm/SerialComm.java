@@ -78,11 +78,13 @@ public class SerialComm implements SerialPortEventListener {
 			/* Ring indicator, 响铃指示 */
 			case SerialPortEvent.RI:
 			
+			/* OUTPUT_BUFFER_EMPTY, 缓冲区溢出 */
 			case SerialPortEvent.OUTPUT_BUFFER_EMPTY:
-				System.out.println("Error: buffer empty!");
+				
 			break;
+			
 			/* Data Available, 数据就绪*/
-			case SerialPortEvent.DATA_AVAILABLE:			
+			case SerialPortEvent.DATA_AVAILABLE:
 				SerialRead serialRead = new SerialRead(in);
 				String out = serialRead.read();
 				SerialWrite serialWrite = new SerialWrite(out);

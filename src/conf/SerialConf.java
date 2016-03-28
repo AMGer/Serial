@@ -24,12 +24,10 @@ public class SerialConf {
 	/**
 	 * »º´æ¿Õ¼ä.
 	 */
-	public static final int BUFFER_SIZE = 4096;
+	public static final int BUFFER_SIZE = 400000;
 	
 	/**
 	 * ·þÎñÆ÷.
 	 */
-	public static final String URL = "http://localhost";
-	
-	
+	public static final String URL = "http://192.168.1.47:8080/Care/Serial";
 }
