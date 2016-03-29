@@ -1,17 +1,13 @@
-import comm.SerialComm;
+import comm.SerialEvent;
 import conf.SerialConf;
 
 public class Serial {
 	public static void main(String[] args) {
-		new Serial().start();
-	}
-	
-	static void start() {
 		try {
-			SerialComm serialComm = new SerialComm(SerialConf.WINDOWS_PORT);
-			serialComm.open();
+			SerialEvent serialEvent = new SerialEvent();
+			serialEvent.handle();			
 		} catch (Exception e) {
-			System.out.println("Error: start!!!");
+			System.out.println("Error: handle!!!");
 			e.printStackTrace();
 		}
 	}

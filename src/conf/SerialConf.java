@@ -24,7 +24,7 @@ public class SerialConf {
 	/**
 	 * »º´æ¿Õ¼ä.
 	 */
-	public static final int BUFFER_SIZE = 400000;
+	public static final int BUFFER_SIZE = 128;
 	
 	/**
 	 * ·þÎñÆ÷.

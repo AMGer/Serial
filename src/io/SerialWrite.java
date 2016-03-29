@@ -28,7 +28,7 @@ public class SerialWrite {
             conn.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0");
             conn.connect();
 
-            in = new BufferedReader(new InputStreamReader(conn.getInputStream())); //server return
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             if (in != null) {
                 System.out.println(in.readLine());
             }

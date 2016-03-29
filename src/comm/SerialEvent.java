@@ -5,25 +5,19 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
-import io.SerialRead;
-import io.SerialWrite;
+import io.SerialCOM;
 
 import java.io.InputStream;
 
 import conf.SerialConf;
 
-public class SerialComm implements SerialPortEventListener {
-	private String port;
-	private InputStream in;
-	private SerialPort serialPort;
+public class SerialEvent implements SerialPortEventListener {
+	InputStream in;
+	SerialPort serialPort;
 	
-	public SerialComm(String port) {
-		this.port = port;
-	}
-	
-	public void open() {
+	public void handle() {
 		try {
-			CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier(port);
+			CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier(SerialConf.WINDOWS_PORT);
 			System.out.println("Port: " + portId.getName());
 			
 			if (portId.isCurrentlyOwned()) {
@@ -31,7 +25,9 @@ public class SerialComm implements SerialPortEventListener {
 			} else {
 				CommPort commPort = portId.open("whatever it's name", SerialConf.TIME_OUT);
 				if (commPort instanceof SerialPort) {
-					serialPort = (SerialPort)commPort;
+					serialPort = (SerialPort) commPort;
+					
+					/* 配置参数 */
 					serialPort.setSerialPortParams(SerialConf.BAUD, 
 							SerialPort.DATABITS_8, 
 							SerialPort.STOPBITS_1, 
@@ -85,10 +81,11 @@ public class SerialComm implements SerialPortEventListener {
 			
 			/* Data Available, 数据就绪*/
 			case SerialPortEvent.DATA_AVAILABLE:
-				SerialRead serialRead = new SerialRead(in);
-				String out = serialRead.read();
-				SerialWrite serialWrite = new SerialWrite(out);
-				serialWrite.write();
+				SerialCOM serialComm = new SerialCOM(in);
+				serialComm.comm();
+			break;
+			default:
+				close();
 			break;
 		}
 	}
