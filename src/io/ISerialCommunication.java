@@ -2,7 +2,7 @@ package io;
 
 public interface ISerialCommunication {
 	/**
-	 * ╢╝©зм╗пе.
+	 * Д╦╡Е▐ёИ─ Д©║.
 	 */
 	public void communicate();
 }

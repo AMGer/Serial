@@ -18,7 +18,6 @@ public class SerialEvent extends Event implements SerialPortEventListener {
 	public void handleEvent() {
 		try {
 			CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier(SerialConf.WINDOWS_PORT);
-//			System.out.println("Port: " + portId.getName());
 			
 			if (portId.isCurrentlyOwned()) {
 				System.out.println("Port busy!");
@@ -48,36 +47,36 @@ public class SerialEvent extends Event implements SerialPortEventListener {
 	@Override
 	public void serialEvent(SerialPortEvent event) {
 		switch (event.getEventType()) {
-			/* Break interrupt, 通讯中断 */
+			/* Break interrupt */
 			case SerialPortEvent.BI:
 				
-			/* Overrun error, 溢位错误 */
+			/* Overrun error */
 			case SerialPortEvent.OE:
 			
-			/* Framing error, 传帧错误 */
+			/* Framing error */
 			case SerialPortEvent.FE:
 			
-			/* Parity error, 校验错误 */
+			/* Parity error */
 			case SerialPortEvent.PE:
 			
-			/* Carrier detect, 载波检测 */
+			/* Carrier detect */
 			case SerialPortEvent.CD:
 			
-			/* Clear to send, 清除发送 */
+			/* Clear to send */
 			case SerialPortEvent.CTS:
 			
-			/* Data set ready, 数据设置就绪 */
+			/* Data set ready */
 			case SerialPortEvent.DSR:
 			
-			/* Ring indicator, 响铃指示 */
+			/* Ring indicator */
 			case SerialPortEvent.RI:
 			
-			/* OUTPUT_BUFFER_EMPTY, 缓冲区溢出 */
+			/* OUTPUT_BUFFER_EMPTY */
 			case SerialPortEvent.OUTPUT_BUFFER_EMPTY:
 				
 			break;
 			
-			/* Data Available, 数据就绪*/
+			/* Data Available */
 			case SerialPortEvent.DATA_AVAILABLE:
 				SerialCommunication serialComm = new SerialCommunication(in);
 				serialComm.communicate();

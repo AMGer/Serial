@@ -2,7 +2,7 @@ package io;
 
 public abstract class Communication {
 	/**
-	 * ´®¿ÚÍ¨ĞÅ.
+	 * ä¸²å£é€šä¿¡.
 	 */
 	public abstract void communicate();
 }
