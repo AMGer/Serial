@@ -4,7 +4,7 @@ public class SerialConf {
 	/**
 	 * Windows 串口.
 	 */
-	public static final String WINDOWS_PORT = "COM3";
+	public static final String WINDOWS_PORT = "COM5";
 	
 	/**
 	 * Linux 串口.
@@ -24,10 +24,10 @@ public class SerialConf {
 	/**
 	 * 缓存空间.
 	 */
-	public static final int BUFFER_SIZE = 128;
+	public static final int BUFFER_SIZE = 1024;
 	
 	/**
 	 * 服务器.
 	 */
-	public static final String URL = "http://192.168.1.47:8080/Care/Serial";
+	public static final String URL = "http://localhost:8080/Care/Serial";
 }

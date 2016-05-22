@@ -5,20 +5,20 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
-import io.SerialCOM;
+import io.SerialCommunication;
 
 import java.io.InputStream;
 
 import conf.SerialConf;
 
-public class SerialEvent implements SerialPortEventListener {
+public class SerialEvent extends Event implements SerialPortEventListener {
 	InputStream in;
 	SerialPort serialPort;
 	
-	public void handle() {
+	public void handleEvent() {
 		try {
 			CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier(SerialConf.WINDOWS_PORT);
-			System.out.println("Port: " + portId.getName());
+//			System.out.println("Port: " + portId.getName());
 			
 			if (portId.isCurrentlyOwned()) {
 				System.out.println("Port busy!");
@@ -26,12 +26,10 @@ public class SerialEvent implements SerialPortEventListener {
 				CommPort commPort = portId.open("whatever it's name", SerialConf.TIME_OUT);
 				if (commPort instanceof SerialPort) {
 					serialPort = (SerialPort) commPort;
-					
-					/* 配置参数 */
 					serialPort.setSerialPortParams(SerialConf.BAUD, 
-							SerialPort.DATABITS_8, 
-							SerialPort.STOPBITS_1, 
-							SerialPort.PARITY_EVEN);
+													SerialPort.DATABITS_8, 
+													SerialPort.STOPBITS_1, 
+													SerialPort.PARITY_EVEN);
 					in = serialPort.getInputStream();
 					serialPort.notifyOnDataAvailable(true);
 					serialPort.addEventListener(this);
@@ -81,8 +79,8 @@ public class SerialEvent implements SerialPortEventListener {
 			
 			/* Data Available, 数据就绪*/
 			case SerialPortEvent.DATA_AVAILABLE:
-				SerialCOM serialComm = new SerialCOM(in);
-				serialComm.comm();
+				SerialCommunication serialComm = new SerialCommunication(in);
+				serialComm.communicate();
 			break;
 			default:
 				close();
@@ -90,7 +88,7 @@ public class SerialEvent implements SerialPortEventListener {
 		}
 	}
 	
-	public void close() {
+	void close() {
 		try {
 			serialPort.notifyOnDataAvailable(false);
 			serialPort.removeEventListener();
