@@ -2,32 +2,32 @@ package conf;
 
 public class SerialConf {
 	/**
-	 * Windows ´®¿Ú.
+	 * Windows ä¸²å£.
 	 */
 	public static final String WINDOWS_PORT = "COM5";
 	
 	/**
-	 * Linux ´®¿Ú.
+	 * Linux ä¸²å£.
 	 */
 	public static final String LINUX_PORT = "/dev/ttyS0";
 	
 	/**
-	 * ²¨ÌØÂÊ.
+	 * æ³¢ç‰¹ç‡.
 	 */
-	public static final int BAUD = 38400;
+	public static final int BAUD = 256000;
 	
 	/**
-	 * ³¬Ê±.
+	 * è¶…æ—¶.
 	 */
 	public static final int TIME_OUT = 5000;
 	
 	/**
-	 * »º´æ¿Õ¼ä.
+	 * ç¼“å†²åŒº.
 	 */
-	public static final int BUFFER_SIZE = 1024;
+	public static final int BUFFER_SIZE = 10240;
 	
 	/**
-	 * ·şÎñÆ÷.
+	 * æœåŠ¡å™¨.
 	 */
 	public static final String URL = "http://localhost:8080/Care/Serial";
 }

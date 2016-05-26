@@ -10,8 +10,9 @@ import java.nio.ByteBuffer;
 import conf.SerialConf;
 
 public class SerialCommunication extends Communication implements ISerialCommunication {
-	ByteBuffer byteBuffer = ByteBuffer.allocate(SerialConf.BUFFER_SIZE);
 	InputStream in;
+	String out = null;
+	ByteBuffer byteBuffer = ByteBuffer.allocate(SerialConf.BUFFER_SIZE);
 	
 	public SerialCommunication(InputStream in) {
 		this.in = in;
@@ -21,7 +22,7 @@ public class SerialCommunication extends Communication implements ISerialCommuni
 		if (in != null) {
 			try {
 				while (in.available() > 0) {
-					String out = read();
+					out = read();
 					byteBuffer.clear();
 					write(out);
 				}
@@ -40,7 +41,6 @@ public class SerialCommunication extends Communication implements ISerialCommuni
 	}
 	
 	String read() {
-		String out = null;
 		try {
 			byte[] head = new byte[2];
 			in.read(head);
@@ -72,9 +72,6 @@ public class SerialCommunication extends Communication implements ISerialCommuni
             conn.connect();
 
             in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            if (in != null) {
-                System.out.println(in.readLine());
-            }
         } catch (Exception e) {
             System.out.println("Error: SerialWrite!");
             e.printStackTrace();
