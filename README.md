@@ -31,7 +31,7 @@ public static final String LINUX_PORT = "/dev/ttyS0";
 public static final int BAUD = 256000;
 
 /**
- * 超时.
+ * 超时时间.
  */
 public static final int TIME_OUT = 5000;
 
@@ -42,8 +42,7 @@ public static final int BUFFER_SIZE = 10240;
 ```
   
 ## Run  
-运行程序你只需打开串口端口以后，使用如下命令即可执行：  
+将源代码打包成 jar 文件后，运行本程序你只需打开操作系统串口端口，使用如下命令即可执行：  
 ```
 java -jar serial.jar
 ```
-
