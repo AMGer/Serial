@@ -6,9 +6,13 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
-
 import conf.SerialConf;
 
+/**
+ * <p>SerialCommunication</p> 端口通信类, 继承 <p>Communication</p> 抽象类, 实现了 <p>ISerialCommunication</p> 端口通信接口.
+ *
+ * @author lishiyun19@163.com
+ */
 public class SerialCommunication extends Communication implements ISerialCommunication {
 	InputStream in;
 	String out = null;
@@ -21,7 +25,7 @@ public class SerialCommunication extends Communication implements ISerialCommuni
 	public void communicate() {
 		if (in != null) {
 			try {
-				while (in.available() > 0) {
+				while (in.available() > 0) { //读取缓冲区所有数据
 					out = read();
 					byteBuffer.clear();
 					write(out);
@@ -39,7 +43,12 @@ public class SerialCommunication extends Communication implements ISerialCommuni
 			}
 		}
 	}
-	
+
+    /**
+     * 每次读取定长数据.
+     *
+     * @return String 数据.
+     */
 	String read() {
 		try {
 			byte[] head = new byte[2];
@@ -57,7 +66,12 @@ public class SerialCommunication extends Communication implements ISerialCommuni
 		}
 		return out;
 	}
-	
+
+    /**
+     * 将数据通过 HTTP 请求发送给云端服务器.
+     *
+     * @param out 数据.
+     */
 	void write(String out) {
         BufferedReader in = null;
 
@@ -66,6 +80,7 @@ public class SerialCommunication extends Communication implements ISerialCommuni
             URL realUrl = new URL(urlNameString);
             URLConnection conn = realUrl.openConnection();
 
+            //构建 HTTP Request Header
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0");

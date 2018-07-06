@@ -1,5 +1,10 @@
 package conf;
 
+/**
+ * <p>SerialConf</p> Java 串口通信配置文件.
+ *
+ * @author lishiyun19@163.com
+ */
 public class SerialConf {
 	/**
 	 * Windows 串口.
@@ -9,7 +14,7 @@ public class SerialConf {
 	/**
 	 * Linux 串口.
 	 */
-	public static final String LINUX_PORT = "/dev/ttyS0";
+//	public static final String LINUX_PORT = "/dev/ttyS0";
 	
 	/**
 	 * 波特率.
@@ -27,7 +32,7 @@ public class SerialConf {
 	public static final int BUFFER_SIZE = 10240;
 	
 	/**
-	 * 服务器.
+	 * 测试服务器.
 	 */
-	public static final String URL = "http://localhost:8080/Care/Serial";
+//	public static final String URL = "http://localhost:8080/Care/Serial";
 }
